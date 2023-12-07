@@ -72,22 +72,51 @@ Function.prototype.myBind = function (ctx, ...bindTimeArguments) {
 
   // CURRIEDSUM
 
-  function curriedSum(numArgs) {
-    numbers = [];
-    sum = 0;
-    return function _curriedSum(num) {
-        numbers.push(num);
-        if (numArgs === numbers.length){
-            sum = numbers.reduce((acc, el) => acc + el);
-            return sum;
-        } else {
-            return _curriedSum();
+//   function curriedSum(numArgs) {
+//     numbers = [];
+//     return function _curriedSum(num) {
+//         numbers.push(num);
+//         if (numArgs === numbers.length){
+//             sum = numbers.reduce((acc, el) => acc + el);
+//             return sum;
+//         } else {
+//             return _curriedSum;
+//         }
+//     }
+//     return _curriedSum;
+//   }
+
+//   let sum2 = curriedSum(4);
+//   console.log(sum2(5)(30)(20)(1));
+
+
+  /////////////////////////
+
+  // Function.prototype.curry
+
+    function myCurry(numArgs) {
+        numbers = [];
+        return function _curry(num) {
+            numbers.push(num);
+            if (numArgs === numbers.length){
+                return numbers;
+            } else {
+                return _curry;
+            }
         }
+        return _curry;
     }
-  }
 
+    let curry2 = myCurry(3);
+    console.log(curry2(5)(6)(7));
 
-  console.log(curriedSum(2)(1))
+// Function.prototype.curry
+// Write a method Function.prototype.curry(numArgs). This should return a function that will
+
+// Collect arguments until there are numArgs of them,
+// If there are too few arguments still, it should return itself.
+// When there are numArgs arguments, it should call the original function.
+// Write a version that uses Function.prototype.apply and another one that uses ... (the spread operator).
 
 
 
